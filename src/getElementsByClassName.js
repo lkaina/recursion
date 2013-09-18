@@ -4,6 +4,28 @@
 // };
 
 // But in stead we're going to implement it from scratch:
-var getElementsByClassName = function (className) {
-  // your code here
+var getElementsByClassName = function (cName) {
+	// your code here
+
+	matchArray = [];
+	startNode = document.body;
+
+	var checkNodes = function(className, currentNode, matches) {
+		if (typeof currentNode.classList !== 'undefined' && currentNode.classList.contains(className)) {
+			matches.push(currentNode);
+		}
+		
+		if (currentNode.hasChildNodes()){
+			var children = currentNode.childNodes;
+
+			for (var i = 0; i < children.length; i++) {
+				checkNodes(className, children[i], matches);
+		  	}
+		}
+		
+
+	};
+
+	checkNodes(cName, startNode, matchArray);
+	return matchArray;
 };
